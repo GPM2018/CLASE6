@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Bucle While</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 500px; margin: 30px auto; padding: 20px; }
-        button { padding: 8px 12px; margin: 5px; cursor: pointer; background: #FF9800; color: white; border: none; border-radius: 3px; }
+        body { background-color: rgba(80, 240, 7, 0.918); font-family: Arial, sans-serif; max-width: 500px; margin: 30px auto; padding: 20px; }
+        button { padding: 8px 12px; margin: 5px; cursor: pointer; background: #070bf1; color: white; border: none; border-radius: 3px; }
         .resultado { background: #f5f5f5; padding: 15px; border-radius: 5px; margin-top: 20px; }
     </style>
 </head>
@@ -14,7 +14,7 @@
 
     <!-- EJEMPLO 1: While simple -->
     <h2>📌 Contar con while</h2>
-    <button onclick="contarWhile()">Contar del 1 al 5</button>
+    <button onclick="contarWhile()">Contar del 1 al 10</button>
     
     <!-- EJEMPLO 2: While con condición -->
     <h2>📌 Sumar números</h2>
@@ -35,7 +35,7 @@
             let i = 1;
             let mensaje = "Contando: ";
             
-            while (i <= 5) {
+            while (i <= 10) {
                 mensaje += i + " ";
                 i++;
             }
@@ -49,7 +49,7 @@
             let numero = 1;
             let mensaje = "";
             
-            while (suma < 10) {
+            while (suma < 30) {
                 suma += numero;
                 mensaje += `Sumando ${numero} → suma parcial: ${suma}<br>`;
                 numero++;
