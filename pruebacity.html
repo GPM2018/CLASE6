@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arroyos y Esteros Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@300;400;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #1a6b3c;
+    --verde-claro: #2d9c5a;
+    --amarillo: #f5c518;
+    --tierra: #c8773a;
+    --crema: #fdf6e8;
+    --oscuro: #0f1e14;
+    --gris: #8a9a8e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--crema);
+    color: var(--oscuro);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: var(--verde);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--amarillo);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--verde);
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  .logo-text {
+    line-height: 1.1;
+  }
+
+  .logo-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: var(--amarillo);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .header-tagline {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--verde) 0%, var(--oscuro) 60%, #0a2f18 100%);
+    padding: 80px 32px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(245,197,24,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -40px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(45,156,90,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--amarillo);
+    color: var(--verde);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 span { color: var(--amarillo); }
+
+  .hero p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--amarillo);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+
+  /* ===== SECTION TITLE ===== */
+  .section-header {
+    text-align: center;
+    padding: 60px 32px 40px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--verde-claro);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--oscuro);
+    font-weight: 700;
+  }
+
+  /* ===== CATEGORY FILTERS ===== */
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 32px 40px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: none;
+    border: 2px solid #ddd;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gris);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--verde);
+    border-color: var(--verde);
+    color: #fff;
+  }
+
+  /* ===== NEGOCIOS GRID ===== */
+  .negocios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 28px;
+    padding: 0 32px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .negocio-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+  }
+
+  .negocio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+  }
+
+  .card-img {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .card-rating {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: var(--amarillo);
+    color: var(--oscuro);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .card-body {
+    padding: 22px;
+  }
+
+  .card-category {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--verde-claro);
+    margin-bottom: 6px;
+  }
+
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--oscuro);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--gris);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-address {
+    font-size: 12px;
+    color: var(--gris);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .btn-ver {
+    background: var(--verde);
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: 'Barlow', sans-serif;
+  }
+
+  .btn-ver:hover { background: var(--verde-claro); }
+
+  /* ===== DETALLE PAGE ===== */
+  .detalle-page {
+    display: none;
+    min-height: 100vh;
+    background: var(--crema);
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .detalle-hero {
+    height: 280px;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .detalle-hero-emoji {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    font-size: 100px;
+    opacity: 0.25;
+  }
+
+  .detalle-breadcrumb {
+    position: absolute;
+    top: 24px;
+    left: 40px;
+  }
+
+  .btn-volver {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    font-family: 'Barlow', sans-serif;
+    transition: background 0.2s;
+  }
+
+  .btn-volver:hover { background: rgba(255,255,255,0.3); }
+
+  .detalle-title-block { position: relative; z-index: 1; }
+
+  .detalle-cat {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--amarillo);
+    margin-bottom: 8px;
+  }
+
+  .detalle-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: #fff;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+
+  .detalle-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  @media (max-width: 700px) {
+    .detalle-content { grid-template-columns: 1fr; }
+  }
+
+  .detalle-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  }
+
+  .detalle-card.full-width { grid-column: 1 / -1; }
+
+  .detalle-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gris);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--crema);
+  }
+
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .info-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .info-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gris);
+    margin-bottom: 2px;
+  }
+
+  .info-value {
+    font-size: 16px;
+    color: var(--oscuro);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .info-value a {
+    color: var(--verde);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .info-value a:hover { text-decoration: underline; }
+
+  .horario-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+  }
+
+  .horario-dia { font-weight: 600; color: var(--oscuro); }
+  .horario-hora { color: var(--gris); }
+
+  .review-item {
+    padding: 14px;
+    background: var(--crema);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    position: relative;
+  }
+
+  .review-item::before {
+    content: '"';
+    font-size: 2rem;
+    color: var(--verde-claro);
+    font-family: 'Playfair Display', serif;
+    line-height: 0.5;
+    margin-right: 6px;
+    vertical-align: -8px;
+  }
+
+  .map-container {
+    border-radius: 16px;
+    overflow: hidden;
+    height: 280px;
+    background: #e8f0eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    border: 3px solid #e0ece4;
+  }
+
+  .map-placeholder-icon { font-size: 48px; }
+
+  .btn-mapa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--verde);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-mapa:hover { background: var(--verde-claro); }
+
+  .btn-llamar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--tierra);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+
+  .btn-llamar:hover { background: #d9854a; }
+
+  .acciones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--oscuro);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 40px 32px;
+    font-size: 13px;
+  }
+
+  footer strong { color: var(--amarillo); }
+
+  /* ===== ESTRELLAS ===== */
+  .estrellas { color: var(--amarillo); }
+
+  /* Colores por categoría */
+  .color-hotel    { background: linear-gradient(135deg, #1a4a6b, #0a2535); }
+  .color-bar      { background: linear-gradient(135deg, #6b1a2a, #35080f); }
+  .color-farmacia { background: linear-gradient(135deg, #1a6b3c, #0a3520); }
+  .color-moto     { background: linear-gradient(135deg, #6b4a1a, #35230a); }
+  .color-super    { background: linear-gradient(135deg, #2a1a6b, #110a35); }
+  .color-cafe     { background: linear-gradient(135deg, #4a3a1a, #23190a); }
+  .color-cons     { background: linear-gradient(135deg, #3a1a1a, #1a0a0a); }
+  .color-belleza  { background: linear-gradient(135deg, #6b1a5a, #35082c); }
+  .color-pan      { background: linear-gradient(135deg, #6b5a1a, #352b0a); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" onclick="mostrarInicio()">
+      <div class="logo-icon">AE</div>
+      <div class="logo-text">
+        <div class="logo-title">Arroyos y Esteros</div>
+        <div class="logo-sub">Digital · Directorio Local</div>
+      </div>
+    </a>
+    <span class="header-tagline">🇵🇾 Cordillera, Paraguay</span>
+  </div>
+</header>
+
+<!-- ===== PÁGINA INICIO ===== -->
+<div id="paginaInicio">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">📍 Distrito de Arroyos y Esteros</div>
+    <h1>Tu guía local<br><span>completa y digital</span></h1>
+    <p>Encontrá los mejores negocios, servicios y comercios de nuestro distrito.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">10</div>
+        <div class="stat-label">Negocios</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Categorías</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.5★</div>
+        <div class="stat-label">Valoración media</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTROS -->
+  <div class="section-header">
+    <div class="section-label">Directorio Comercial</div>
+    <h2 class="section-title">Negocios Locales</h2>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filtrar('todos', this)">Todos</button>
+    <button class="filter-btn" onclick="filtrar('hotel', this)">🏨 Hotel</button>
+    <button class="filter-btn" onclick="filtrar('bar', this)">🍺 Bar & Resto</button>
+    <button class="filter-btn" onclick="filtrar('farmacia', this)">💊 Farmacia</button>
+    <button class="filter-btn" onclick="filtrar('moto', this)">🏍️ Motorepuestos</button>
+    <button class="filter-btn" onclick="filtrar('super', this)">🛒 Supermercado</button>
+    <button class="filter-btn" onclick="filtrar('construccion', this)">🏗️ Construcción</button>
+    <button class="filter-btn" onclick="filtrar('belleza', this)">💇 Belleza</button>
+    <button class="filter-btn" onclick="filtrar('panaderia', this)">🥐 Panadería</button>
+  </div>
+
+  <!-- GRID DE NEGOCIOS -->
+  <div class="negocios-grid" id="negociosGrid">
+  </div>
+
+  <footer>
+    <p>© 2025 <strong>Arroyos y Esteros Digital</strong> · Directorio Comercial Local</p>
+    <p style="margin-top:8px">Cordillera, Paraguay 🇵🇾 · Todos los derechos reservados</p>
+  </footer>
+
+</div>
+
+<!-- ===== PÁGINA DETALLE ===== -->
+<div id="paginaDetalle" class="detalle-page">
+  <div id="detalleHero" class="detalle-hero">
+    <div class="detalle-breadcrumb">
+      <button class="btn-volver" onclick="mostrarInicio()">← Volver al directorio</button>
+    </div>
+    <span class="detalle-hero-emoji" id="detalleEmoji"></span>
+    <div class="detalle-title-block">
+      <div class="detalle-cat" id="detalleCat"></div>
+      <div class="detalle-name" id="detalleNombre"></div>
+    </div>
+  </div>
+
+  <div class="detalle-content" id="detalleContent">
+  </div>
+
+  <footer>
+    <p>© 2025 <strong>Arroyos y Esteros Digital</strong> · Directorio Comercial Local</p>
+  </footer>
+</div>
+
+<script>
+const negocios = [
+  {
+    id: 1,
+    nombre: "Hotel & Restaurant Don Nenito",
+    categoria: "hotel",
+    categoriaLabel: "Hotel & Restaurante",
+    emoji: "🏨",
+    colorClass: "color-hotel",
+    descripcion: "El mejor lugar para hospedarse en Arroyos y Esteros. Habitaciones cómodas, restaurante, piscina y excelente atención.",
+    telefono: "+595 982 159328",
+    direccion: "Ruta, Arroyos y Esteros 030301",
+    horario: [
+      { dia: "Lunes – Viernes", hora: "Abierto todo el día" },
+      { dia: "Sábado", hora: "Abierto todo el día" },
+      { dia: "Domingo", hora: "Abierto todo el día" },
+    ],
+    rating: 4.6,
+    totalRatings: 215,
+    lat: -25.055357,
+    lng: -57.0944194,
+    reviews: [
+      "Absoluta joya de Arroyos y Esteros. La comida y el personal son de primera.",
+      "Excelente ubicación, personal profesional, buena comida y habitaciones limpias.",
+      "La piscina y las áreas comunes son muy cómodas para relajarse."
+    ],
+    servicios: ["Habitaciones AC", "Restaurante", "Piscina", "Estacionamiento", "WiFi", "Eventos"]
+  },
+  {
+    id: 2,
+    nombre: "Bar Del Centro",
+    categoria: "bar",
+    categoriaLabel: "Bar & Restaurante",
+    emoji: "🍺",
+    colorClass: "color-bar",
+    descripcion: "El punto de reunión del centro de la ciudad. Pizzas artesanales, ambiente agradable y atención de primera.",
+    telefono: "No disponible",
+    direccion: "Centro, Arroyos y Esteros 030301",
+    horario: [
+      { dia: "Lunes – Sábado", hora: "11:00 AM – 11:00 PM" },
+      { dia: "Domingo", hora: "12:00 PM – 10:00 PM" },
+    ],
+    rating: 4.6,
+    totalRatings: 28,
+    lat: -25.0562925,
+    lng: -57.0964982,
+    reviews: [
+      "La pizza de carne es imperdible, la masa crocante y el ambiente genial.",
+      "Comida espectacular, muy recomendado para comer en Arroyos y Esteros.",
+      "Deliciosa comida y ambiente agradable. Excelente servicio."
+    ],
+    servicios: ["Pizzas artesanales", "Bebidas", "Cerveza artesanal", "Mesas al aire libre", "WiFi"]
+  },
+  {
+    id: 3,
+    nombre: "Farmacia San Fernando",
+    categoria: "farmacia",
+    categoriaLabel: "Farmacia",
+    emoji: "💊",
+    colorClass: "color-farmacia",
+    descripcion: "Farmacia de confianza con amplio stock de medicamentos, cosméticos y productos de salud. Atención todos los días.",
+    telefono: "No disponible",
+    direccion: "Arroyos y Esteros 030301",
+    horario: [
+      { dia: "Lunes – Sábado", hora: "6:00 AM – 11:00 PM" },
+      { dia: "Domingo", hora: "6:00 AM – 11:00 PM" },
+    ],
+    rating: null,
+    totalRatings: null,
+    lat: -25.0527845,
+    lng: -57.0963237,
+    reviews: [],
+    servicios: ["Medicamentos", "Cosméticos", "Atención al cliente", "Productos de higiene", "Inyectología"]
+  },
+  {
+    id: 4,
+    nombre: "Motorepuesto 20 de Julio",
+    categoria: "moto",
+    categoriaLabel: "Motorepuestos",
+    emoji: "🏍️",
+    colorClass: "color-moto",
+    descripcion: "Repuestos para motos y vehículos con los mejores precios del distrito. Servicio rápido y atención personalizada.",
+    telefono: "+595 986 322720",
+    direccion: "Arroyos y Esteros 030301",
+    horario: [
+      { dia: "Lunes – Viernes", hora: "7:30 AM – 6:00 PM" },
+      { dia: "Sábado", hora: "7:30 AM – 12:00 PM" },
+      { dia: "Domingo", hora: "Cerrado" },
+    ],
+    rating: 4.9,
+    totalRatings: 10,
+    lat: -25.0518201,
+    lng: -57.0981695,
+    reviews: [
+      "Excelente servicio, muy recomendado.",
+      "Excelente atención, sigan así!"
+    ],
+    servicios: ["Repuestos de motos", "Repuestos de autos", "Accesorios", "Lubricantes", "Asesoría técnica"]
+  },
+  {
+    id: 5,
+    nombre: "Motorepuesto Miquitis",
+    categoria: "moto",
+    categoriaLabel: "Motorepuestos",
+    emoji: "⚙️",
+    colorClass: "color-moto",
+    descripcion: "El mejor lugar para repuestos de motos y vehículos. Precios justos, calidad garantizada y amplio stock.",
+    telefono: "+595 985 568428",
+    direccion: "Arroyos y Esteros 030301",
+    horario: [
+      { dia: "Lunes – Viernes", hora: "7:00 AM – 6:00 PM" },
+      { dia: "Sábado", hora: "7:00 AM – 12:00 PM" },
+      { dia: "Domingo", hora: "Cerrado" },
+    ],
+    rating: 4.8,
+    totalRatings: 6,
+    lat: -25.0536442,
+    lng: -57.0980659,
+    reviews: [
+      "El mejor lugar para repuestos de motos y vehículos... el mejor precio y calidad.",
+      "Buen lugar para hacer tus compras."
+    ],
+    servicios: ["Repuestos de motos", "Repuestos de autos", "Aceites y filtros", "Accesorios", "Precios competitivos"]
+  },
+  {
+    id: 6,
+    nombre: "San Francisco Supermercado",
+    categoria: "super",
+    categoriaLabel: "Supermercado",
+    emoji: "🛒",
+    colorClass: "color-super",
+    descripcion: "Supermercado completo con amplia variedad de productos. Buenos precios y atención al cliente de calidad.",
+    telefono: "+595 981 334479",
+    direccion: "Ruta 3 km 63.5, Arroyos y Esteros 1208",
+    horario: [
+      { dia: "Lunes – Sábado", hora: "6:00 AM – 9:00 PM" },
+      { dia: "Domingo", hora: "6:00 AM – 9:00 PM" },
+    ],
+    rating: 4.2,
+    totalRatings: 375,
+    lat: -25.0525262,
+    lng: -57.1016342,
+    reviews: [
+      "Lugar espacioso donde encontrás todo lo que buscás a buen precio.",
+      "Buenos precios, excelente atención y productos de calidad."
+    ],
+    servicios: ["Alimentos", "Bebidas", "Limpieza", "Carnicería", "Verdulería", "Panadería"]
+  },
+  {
+    id: 7,
+    nombre: "Super Natividad",
+    categoria: "super",
+    categoriaLabel: "Supermercado",
+    emoji: "🏪",
+    colorClass: "color-super",
+    descripcion: "Supermercado de dos pisos con amplia variedad de productos: alimentos, ferretería, hogar, ropa y más.",
+    telefono: "+595 971 776353",
+    direccion: "Padre Fidel Maíz esq. 14 de Mayo, Arroyos y Esteros",
+    horario: [
+      { dia: "Lunes – Sábado", hora: "6:30 AM – 12:00 PM / 2:00 – 8:00 PM" },
+      { dia: "Domingo", hora: "Cerrado" },
+    ],
+    rating: 4.2,
+    totalRatings: 175,
+    lat: -25.0559975,
+    lng: -57.0975471,
+    reviews: [
+      "Excelente atención al cliente, variedad de productos de muy buena calidad.",
+      "Supermercado con gran variedad de artículos, ferretería, decoración, libros y ropa."
+    ],
+    servicios: ["Alimentos y bebidas", "Ferretería", "Decoración del hogar", "Libros", "Ropa", "Dos pisos"]
+  },
+  {
+    id: 8,
+    nombre: "Materiales de Construcción El Aborigen",
+    categoria: "construccion",
+    categoriaLabel: "Materiales de Construcción",
+    emoji: "🏗️",
+    colorClass: "color-cons",
+    descripcion: "Todo lo que necesitás para tu obra. Materiales de construcción, herramientas y asesoramiento técnico profesional.",
+    telefono: "+595 986 448862",
+    direccion: "Arroyos y Esteros 030306",
+    horario: [
+      { dia: "Lunes – Sábado", hora: "7:00 AM – 6:00 PM" },
+      { dia: "Domingo", hora: "Cerrado" },
+    ],
+    rating: 4.5,
+    totalRatings: 11,
+    lat: -25.0578368,
+    lng: -57.1010939,
+    reviews: [
+      "Excelente servicio y tienen casi todo lo que necesitás para una obra.",
+      "Buen servicio, excelente precio."
+    ],
+    servicios: ["Cemento y arena", "Hierros y bloques", "Herramientas", "Pintura", "Electricidad", "Asesoramiento"]
+  },
+  {
+    id: 9,
+    nombre: "Janin Salón de Belleza",
+    categoria: "belleza",
+    categoriaLabel: "Salón de Belleza",
+    emoji: "💇",
+    colorClass: "color-belleza",
+    descripcion: "Peluquería profesional y studio de maquillaje social. El mejor lugar para lucir espectacular en cada ocasión.",
+    telefono: "+595 992 348008",
+    direccion: "Mariscal Estigarribia, Arroyos y Esteros",
+    horario: [
+      { dia: "Lunes", hora: "7:30 AM – 7:00 PM" },
+      { dia: "Martes – Viernes", hora: "7:00 AM – 7:30 PM" },
+      { dia: "Sábado", hora: "7:00 AM – 8:00 PM" },
+      { dia: "Domingo", hora: "10:30 AM – 4:30 PM" },
+    ],
+    rating: 4.7,
+    totalRatings: 14,
+    lat: -25.054142,
+    lng: -57.0980105,
+    reviews: [
+      "Muy recomendado!!!",
+      "Excelente servicio!!!"
+    ],
+    servicios: ["Corte de cabello", "Tinte y decoloración", "Maquillaje social", "Peinados", "Tratamientos capilares", "Uñas"]
+  },
+  {
+    id: 10,
+    nombre: "Panadería y Confitería Todo Rico",
+    categoria: "panaderia",
+    categoriaLabel: "Panadería & Confitería",
+    emoji: "🥐",
+    colorClass: "color-pan",
+    descripcion: "Deliciosos panes, tortas y confitería artesanal. Productos frescos elaborados diariamente para toda la familia.",
+    telefono: "+595 981 545070",
+    direccion: "Arroyos y Esteros 030301",
+    horario: [
+      { dia: "Lunes – Sábado", hora: "7:00 AM – 8:40 PM" },
+      { dia: "Domingo", hora: "7:00 AM – 12:30 PM" },
+    ],
+    rating: 4.2,
+    totalRatings: 15,
+    lat: -25.0551429,
+    lng: -57.0984286,
+    reviews: [
+      "Buenos productos."
+    ],
+    servicios: ["Panes frescos", "Tortas y pasteles", "Facturas", "Bizcochos", "Sandwiches", "Pedidos especiales"]
+  }
+];
+
+function estrellas(rating) {
+  if (!rating) return '';
+  const full = Math.floor(rating);
+  const half = rating % 1 >= 0.5 ? 1 : 0;
+  const empty = 5 - full - half;
+  return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+}
+
+function crearCard(n) {
+  const ratingHTML = n.rating
+    ? `<div class="card-rating"><span class="estrellas">★</span> ${n.rating} (${n.totalRatings})</div>`
+    : '';
+  return `
+    <div class="negocio-card" data-cat="${n.categoria}" onclick="mostrarDetalle(${n.id})">
+      <div class="card-img ${n.colorClass}">
+        <span style="font-size:64px">${n.emoji}</span>
+        <span class="card-badge">${n.categoriaLabel}</span>
+        ${ratingHTML}
+      </div>
+      <div class="card-body">
+        <div class="card-category">${n.categoriaLabel}</div>
+        <div class="card-name">${n.nombre}</div>
+        <div class="card-desc">${n.descripcion}</div>
+        <div class="card-footer">
+          <span class="card-address">📍 Arroyos y Esteros</span>
+          <button class="btn-ver">Ver más →</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderGrid(lista) {
+  document.getElementById('negociosGrid').innerHTML = lista.map(crearCard).join('');
+}
+
+function filtrar(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const lista = cat === 'todos' ? negocios : negocios.filter(n => n.categoria === cat);
+  renderGrid(lista);
+}
+
+function mostrarDetalle(id) {
+  const n = negocios.find(x => x.id === id);
+  if (!n) return;
+
+  document.getElementById('detalleHero').className = `detalle-hero ${n.colorClass}`;
+  document.getElementById('detalleEmoji').textContent = n.emoji;
+  document.getElementById('detalleCat').textContent = n.categoriaLabel;
+  document.getElementById('detalleNombre').textContent = n.nombre;
+
+  const ratingBlock = n.rating
+    ? `<p style="font-size:28px;color:var(--amarillo);font-weight:700;margin-bottom:4px">${n.rating} <span style="font-size:20px">${estrellas(n.rating)}</span></p>
+       <p style="color:var(--gris);font-size:13px">${n.totalRatings} valoraciones en Google</p>`
+    : '<p style="color:var(--gris);font-size:14px">Sin valoraciones disponibles</p>';
+
+  const tel = n.telefono !== 'No disponible'
+    ? `<a href="tel:${n.telefono}">${n.telefono}</a>`
+    : '<span style="color:var(--gris)">No disponible</span>';
+
+  const horarioRows = n.horario.map(h =>
+    `<div class="horario-row"><span class="horario-dia">${h.dia}</span><span class="horario-hora">${h.hora}</span></div>`
+  ).join('');
+
+  const reviews = n.reviews.length
+    ? n.reviews.map(r => `<div class="review-item">${r}</div>`).join('')
+    : '<p style="color:var(--gris);font-size:14px">Sin reseñas disponibles aún.</p>';
+
+  const serviciosBadges = n.servicios.map(s =>
+    `<span style="display:inline-block;background:var(--crema);border:1px solid #ddd;border-radius:20px;padding:5px 14px;font-size:13px;margin:4px;font-weight:600;color:var(--verde)">${s}</span>`
+  ).join('');
+
+  const btnLlamar = n.telefono !== 'No disponible'
+    ? `<a href="tel:${n.telefono}" class="btn-llamar">📞 Llamar ahora</a>`
+    : '';
+
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${n.lat},${n.lng}`;
+  const wazeUrl = `https://waze.com/ul?ll=${n.lat},${n.lng}&navigate=yes`;
+
+  document.getElementById('detalleContent').innerHTML = `
+
+    <div class="detalle-card">
+      <h3>📞 Contacto y Ubicación</h3>
+      <div class="info-row">
+        <div class="info-icon" style="background:#e8f5ed">📞</div>
+        <div>
+          <div class="info-label">Teléfono</div>
+          <div class="info-value">${tel}</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon" style="background:#e8f5ed">📍</div>
+        <div>
+          <div class="info-label">Dirección</div>
+          <div class="info-value">${n.direccion}</div>
+        </div>
+      </div>
+      <div class="acciones">
+        <a href="${mapsUrl}" target="_blank" class="btn-mapa">🗺️ Ver en Google Maps</a>
+        <a href="${wazeUrl}" target="_blank" class="btn-mapa" style="background:var(--tierra)">🚗 Abrir en Waze</a>
+        ${btnLlamar}
+      </div>
+    </div>
+
+    <div class="detalle-card">
+      <h3>⏰ Horarios de Atención</h3>
+      ${horarioRows}
+    </div>
+
+    <div class="detalle-card">
+      <h3>⭐ Valoración</h3>
+      ${ratingBlock}
+    </div>
+
+    <div class="detalle-card">
+      <h3>🛠️ Servicios</h3>
+      <div>${serviciosBadges}</div>
+    </div>
+
+    <div class="detalle-card full-width">
+      <h3>🗺️ Cómo Llegar</h3>
+      <div class="map-container">
+        <div class="map-placeholder-icon">📍</div>
+        <div style="text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;color:var(--verde);margin-bottom:4px">${n.nombre}</div>
+          <div style="font-size:13px;color:var(--gris);margin-bottom:16px">${n.direccion}</div>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+            <a href="${mapsUrl}" target="_blank" class="btn-mapa">🗺️ Abrir Google Maps</a>
+            <a href="${wazeUrl}" target="_blank" class="btn-mapa" style="background:#09c">🚗 Navegar con Waze</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detalle-card full-width">
+      <h3>💬 Reseñas de Clientes</h3>
+      ${reviews}
+      <p style="font-size:12px;color:var(--gris);margin-top:12px">Reseñas obtenidas de Google Maps</p>
+    </div>
+  `;
+
+  document.getElementById('paginaInicio').style.display = 'none';
+  document.getElementById('paginaDetalle').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function mostrarInicio() {
+  document.getElementById('paginaInicio').style.display = 'block';
+  document.getElementById('paginaDetalle').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+// Init
+renderGrid(negocios);
+</script>
+</body>
+</html>
