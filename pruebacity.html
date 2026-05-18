@@ -378,6 +378,20 @@
     padding: 40px;
     position: relative;
     overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  .detalle-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
   }
 
   .detalle-hero-emoji {
@@ -393,6 +407,7 @@
     position: absolute;
     top: 24px;
     left: 40px;
+    z-index: 2;
   }
 
   .btn-volver {
@@ -414,7 +429,10 @@
 
   .btn-volver:hover { background: rgba(255,255,255,0.3); }
 
-  .detalle-title-block { position: relative; z-index: 1; }
+  .detalle-title-block { 
+    position: relative; 
+    z-index: 2;
+  }
 
   .detalle-cat {
     font-size: 11px;
@@ -431,6 +449,7 @@
     color: #fff;
     font-weight: 900;
     line-height: 1.1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
   }
 
   .detalle-content {
@@ -542,19 +561,97 @@
   }
 
   .map-container {
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
-    height: 280px;
-    background: #e8f0eb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 12px;
+    min-height: 380px;
+    background: linear-gradient(135deg, #e8f0eb 0%, #d6e8db 100%);
+    position: relative;
     border: 3px solid #e0ece4;
+    box-shadow: 0 4px 20px rgba(26, 107, 60, 0.12);
+  }
+
+  .map-preview {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.55);
+    transition: background-image 0.4s ease-in-out;
+  }
+
+  .map-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 22px;
+    z-index: 1;
+    color: #fff;
+  }
+
+  .map-overlay-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .map-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.1;
+    text-shadow: 0 18px 45px rgba(0,0,0,0.35);
+  }
+
+  .map-subtitle {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.9);
+    margin-top: 6px;
+  }
+
+  .map-route-info {
+    background: rgba(0,0,0,0.42);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 16px;
+    padding: 14px 18px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    max-width: 100%;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  }
+
+  .map-button-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  #mapid {
+    display: none;
   }
 
   .map-placeholder-icon { font-size: 48px; }
+
+  .carousel {
+    display: none;
+  }
+
+  .carousel-image {
+    display: none;
+  }
+
+  .carousel-dots {
+    display: none;
+  }
+
+  .dot {
+    display: none;
+  }
 
   .btn-mapa {
     display: inline-flex;
@@ -725,6 +822,11 @@ const negocios = [
     emoji: "🏨",
     colorClass: "color-hotel",
     descripcion: "El mejor lugar para hospedarse en Arroyos y Esteros. Habitaciones cómodas, restaurante, piscina y excelente atención.",
+    imagenes: [
+      "https://source.unsplash.com/800x400/?hotel,bedroom,luxury",
+      "https://source.unsplash.com/800x400/?resort,pool,vacation",
+      "https://source.unsplash.com/800x400/?hotel,restaurant,dining"
+    ],
     telefono: "+595 982 159328",
     direccion: "Ruta, Arroyos y Esteros 030301",
     horario: [
@@ -751,6 +853,11 @@ const negocios = [
     emoji: "🍺",
     colorClass: "color-bar",
     descripcion: "El punto de reunión del centro de la ciudad. Pizzas artesanales, ambiente agradable y atención de primera.",
+    imagenes: [
+      "https://source.unsplash.com/800x400/?bar,pizza,restaurant",
+      "https://source.unsplash.com/800x400/?pub,drinks,food",
+      "https://source.unsplash.com/800x400/?restaurant,ambiance,dining"
+    ],
     telefono: "No disponible",
     direccion: "Centro, Arroyos y Esteros 030301",
     horario: [
@@ -776,6 +883,11 @@ const negocios = [
     emoji: "💊",
     colorClass: "color-farmacia",
     descripcion: "Farmacia de confianza con amplio stock de medicamentos, cosméticos y productos de salud. Atención todos los días.",
+    imagenes: [
+      "https://source.unsplash.com/800x400/?pharmacy,medicine,health",
+      "https://source.unsplash.com/800x400/?drugs,pills,medication",
+      "https://source.unsplash.com/800x400/?healthcare,medical,clinic"
+    ],
     telefono: "No disponible",
     direccion: "Arroyos y Esteros 030301",
     horario: [
@@ -797,6 +909,11 @@ const negocios = [
     emoji: "🏍️",
     colorClass: "color-moto",
     descripcion: "Repuestos para motos y vehículos con los mejores precios del distrito. Servicio rápido y atención personalizada.",
+    imagenes: [
+      "https://source.unsplash.com/800x400/?motorcycle,parts,mechanic",
+      "https://source.unsplash.com/800x400/?bike,repair,tools",
+      "https://source.unsplash.com/800x400/?auto,repuestos,garage"
+    ],
     telefono: "+595 986 322720",
     direccion: "Arroyos y Esteros 030301",
     horario: [
@@ -822,6 +939,11 @@ const negocios = [
     emoji: "⚙️",
     colorClass: "color-moto",
     descripcion: "El mejor lugar para repuestos de motos y vehículos. Precios justos, calidad garantizada y amplio stock.",
+    imagenes: [
+      "https://source.unsplash.com/800x400/?motorcycle,spare,parts",
+      "https://source.unsplash.com/800x400/?bike,maintenance,repair",
+      "https://source.unsplash.com/800x400/?tools,workshop,garage"
+    ],
     telefono: "+595 985 568428",
     direccion: "Arroyos y Esteros 030301",
     horario: [
@@ -847,6 +969,11 @@ const negocios = [
     emoji: "🛒",
     colorClass: "color-super",
     descripcion: "Supermercado completo con amplia variedad de productos. Buenos precios y atención al cliente de calidad.",
+    imagenes: [
+      "https://source.unsplash.com/800x400/?supermarket,groceries,shopping",
+      "https://source.unsplash.com/800x400/?grocery,store,fresh",
+      "https://source.unsplash.com/800x400/?market,food,products"
+    ],
     telefono: "+595 981 334479",
     direccion: "Ruta 3 km 63.5, Arroyos y Esteros 1208",
     horario: [
@@ -871,6 +998,11 @@ const negocios = [
     emoji: "🏪",
     colorClass: "color-super",
     descripcion: "Supermercado de dos pisos con amplia variedad de productos: alimentos, ferretería, hogar, ropa y más.",
+    imagenes: [
+      "https://source.unsplash.com/800x400/?supermarket,retail,store",
+      "https://source.unsplash.com/800x400/?shopping,mall,merchandise",
+      "https://source.unsplash.com/800x400/?store,interior,shopping"
+    ],
     telefono: "+595 971 776353",
     direccion: "Padre Fidel Maíz esq. 14 de Mayo, Arroyos y Esteros",
     horario: [
@@ -895,6 +1027,11 @@ const negocios = [
     emoji: "🏗️",
     colorClass: "color-cons",
     descripcion: "Todo lo que necesitás para tu obra. Materiales de construcción, herramientas y asesoramiento técnico profesional.",
+    imagenes: [
+      "https://source.unsplash.com/800x400/?construction,materials,building",
+      "https://source.unsplash.com/800x400/?hardware,tools,warehouse",
+      "https://source.unsplash.com/800x400/?construction,industry,work"
+    ],
     telefono: "+595 986 448862",
     direccion: "Arroyos y Esteros 030306",
     horario: [
@@ -919,6 +1056,11 @@ const negocios = [
     emoji: "💇",
     colorClass: "color-belleza",
     descripcion: "Peluquería profesional y studio de maquillaje social. El mejor lugar para lucir espectacular en cada ocasión.",
+    imagenes: [
+      "https://source.unsplash.com/800x400/?salon,beauty,hair",
+      "https://source.unsplash.com/800x400/?barber,haircut,grooming",
+      "https://source.unsplash.com/800x400/?beauty,makeup,interior"
+    ],
     telefono: "+595 992 348008",
     direccion: "Mariscal Estigarribia, Arroyos y Esteros",
     horario: [
@@ -945,6 +1087,11 @@ const negocios = [
     emoji: "🥐",
     colorClass: "color-pan",
     descripcion: "Deliciosos panes, tortas y confitería artesanal. Productos frescos elaborados diariamente para toda la familia.",
+    imagenes: [
+      "https://source.unsplash.com/800x400/?bakery,bread,pastry",
+      "https://source.unsplash.com/800x400/?cake,baking,dessert",
+      "https://source.unsplash.com/800x400/?confectionery,sweets,food"
+    ],
     telefono: "+595 981 545070",
     direccion: "Arroyos y Esteros 030301",
     horario: [
@@ -1008,10 +1155,25 @@ function mostrarDetalle(id) {
   const n = negocios.find(x => x.id === id);
   if (!n) return;
 
-  document.getElementById('detalleHero').className = `detalle-hero ${n.colorClass}`;
-  document.getElementById('detalleEmoji').textContent = n.emoji;
-  document.getElementById('detalleCat').textContent = n.categoriaLabel;
-  document.getElementById('detalleNombre').textContent = n.nombre;
+  // Obtener imagen de fondo
+  const imagenFondo = n.imagenes && n.imagenes.length > 0 ? n.imagenes[0] : '';
+
+  const detalleHero = document.getElementById('detalleHero');
+  detalleHero.className = `detalle-hero ${n.colorClass}`;
+  
+  if (imagenFondo) {
+    detalleHero.style.backgroundImage = `url('${imagenFondo}')`;
+  }
+
+  detalleHero.innerHTML = `
+    <div class="detalle-breadcrumb">
+      <button class="btn-volver" onclick="mostrarInicio()">← Volver al directorio</button>
+    </div>
+    <div class="detalle-title-block">
+      <div class="detalle-cat">${n.categoriaLabel}</div>
+      <div class="detalle-name">${n.nombre}</div>
+    </div>
+  `;
 
   const ratingBlock = n.rating
     ? `<p style="font-size:28px;color:var(--amarillo);font-weight:700;margin-bottom:4px">${n.rating} <span style="font-size:20px">${estrellas(n.rating)}</span></p>
@@ -1083,16 +1245,14 @@ function mostrarDetalle(id) {
 
     <div class="detalle-card full-width">
       <h3>🗺️ Cómo Llegar</h3>
+      <p style="font-size: 13px; color: var(--gris); margin-bottom: 16px;">Previsualización del mapa con la ubicación exacta.</p>
       <div class="map-container">
-        <div class="map-placeholder-icon">📍</div>
-        <div style="text-align:center">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;color:var(--verde);margin-bottom:4px">${n.nombre}</div>
-          <div style="font-size:13px;color:var(--gris);margin-bottom:16px">${n.direccion}</div>
-          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-            <a href="${mapsUrl}" target="_blank" class="btn-mapa">🗺️ Abrir Google Maps</a>
-            <a href="${wazeUrl}" target="_blank" class="btn-mapa" style="background:#09c">🚗 Navegar con Waze</a>
-          </div>
-        </div>
+        <img id="mapid" alt="Mapa de ${n.nombre}" />
+      </div>
+      <div id="rutaInfo" style="font-size: 14px; color: var(--verde); margin-top: 12px; text-align:center;">Obteniendo tu ubicación...</div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+        <a id="googleMapsBtn" href="${mapsUrl}" target="_blank" class="btn-mapa">🗺️ Abrir Google Maps</a>
+        <a id="wazeBtn" href="${wazeUrl}" target="_blank" class="btn-mapa" style="background:#09c">🚗 Navegar con Waze</a>
       </div>
     </div>
 
@@ -1106,6 +1266,69 @@ function mostrarDetalle(id) {
   document.getElementById('paginaInicio').style.display = 'none';
   document.getElementById('paginaDetalle').style.display = 'block';
   window.scrollTo(0, 0);
+
+  const mapImage = document.getElementById('mapid');
+  if (mapImage) {
+    mapImage.style.width = '100%';
+    mapImage.style.height = '100%';
+    mapImage.style.objectFit = 'cover';
+    mapImage.alt = `Mapa de ${n.nombre}`;
+    const osmUrl = `https://staticmap.openstreetmap.de/staticmap.php?center=${n.lat},${n.lng}&zoom=16&size=640x320&markers=${n.lat},${n.lng},red-pushpin`;
+    const wikimediaUrl = `https://maps.wikimedia.org/img/osm-intl,${n.lng},${n.lat},16,640x320.png`;
+    mapImage.onerror = function() {
+      if (this.src !== wikimediaUrl) {
+        this.src = wikimediaUrl;
+      } else {
+        this.src = 'https://via.placeholder.com/640x320.png?text=Mapa+no+disponible';
+      }
+    };
+    mapImage.src = osmUrl;
+  }
+  actualizarRutaActual(n);
+}
+
+function actualizarRutaActual(n) {
+  const rutaInfo = document.getElementById('rutaInfo');
+  const googleMapsBtn = document.getElementById('googleMapsBtn');
+  if (!rutaInfo) return;
+
+  rutaInfo.textContent = 'Buscando tu ubicación...';
+
+  if (!navigator.geolocation) {
+    rutaInfo.innerHTML = 'Tu navegador no soporta geolocalización. Usa el botón de Google Maps para iniciar la ruta manualmente.';
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    const lat = pos.coords.latitude;
+    const lng = pos.coords.longitude;
+    const origin = `${lat},${lng}`;
+    const destination = `${n.lat},${n.lng}`;
+    if (googleMapsBtn) {
+      googleMapsBtn.href = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
+    }
+
+    try {
+      const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${lng},${lat};${n.lng},${n.lat}?overview=false&alternatives=false&steps=false`);
+      const data = await res.json();
+      if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+        const route = data.routes[0];
+        const minutes = Math.round(route.duration / 60);
+        const km = (route.distance / 1000).toFixed(1);
+        rutaInfo.innerHTML = `<strong>Origen automático:</strong> tu ubicación actual<br><strong>Tiempo estimado:</strong> ${minutes} min · <strong>Distancia:</strong> ${km} km`;
+      } else {
+        rutaInfo.innerHTML = 'Ruta encontrada. Abre Google Maps para ver el tiempo estimado.';
+      }
+    } catch (error) {
+      rutaInfo.innerHTML = 'No se pudo calcular la duración automáticamente. Abre Google Maps para ver la ruta.';
+    }
+  }, (err) => {
+    if (err.code === 1) {
+      rutaInfo.innerHTML = 'Debes permitir el acceso a la ubicación para ver el tiempo de llegada. Usa el botón de Google Maps cuando lo habilites.';
+    } else {
+      rutaInfo.innerHTML = 'No se puede obtener tu posición. Usa el botón de Google Maps para iniciar la ruta manualmente.';
+    }
+  }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 });
 }
 
 function mostrarInicio() {
@@ -1113,6 +1336,16 @@ function mostrarInicio() {
   document.getElementById('paginaDetalle').style.display = 'none';
   window.scrollTo(0, 0);
 }
+
+// Efecto Parallax en el fondo
+window.addEventListener('scroll', () => {
+  const detalleHero = document.getElementById('detalleHero');
+  if (detalleHero && detalleHero.style.display !== 'none') {
+    const scrollPosition = window.scrollY;
+    const parallaxSpeed = 0.5;
+    detalleHero.style.backgroundPosition = `center ${scrollPosition * parallaxSpeed}px`;
+  }
+});
 
 // Init
 renderGrid(negocios);
